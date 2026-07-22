@@ -1,0 +1,165 @@
+.todo-container {
+  width: 600px;
+  max-width: 90%;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: rgb(95, 95, 115);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.todo-container h1 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* Input section */
+
+.input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input-section input {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  background-color: #363030;
+}
+
+.input-section input:focus {
+  border-color: #ff0000;
+  color: #ff0000;
+}
+
+.input-section button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 6px;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.input-section button:hover {
+  background-color: #555;
+}
+
+/* Filter buttons */
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.filter-buttons button {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  background-color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.filter-buttons button:hover {
+  background-color: #eee;
+}
+
+.filter-buttons .active-filter {
+  background-color: #333;
+  color: white;
+  border-color: #333;
+}
+
+/* Task list */
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+}
+
+.task-list li span {
+  flex: 1;
+  word-break: break-word;
+}
+
+.completed-task span {
+  text-decoration: line-through;
+  color: #888;
+}
+
+/* Task buttons */
+
+.task-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.task-buttons button {
+  padding: 7px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.complete-btn {
+  background-color: #dff5e3;
+}
+
+.edit-btn {
+  background-color: #fff0c7;
+}
+
+.delete-btn {
+  background-color: #ffdada;
+}
+
+.task-buttons button:hover {
+  opacity: 0.75;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .todo-container {
+    margin: 30px auto;
+    padding: 20px;
+  }
+
+  .input-section {
+    flex-direction: column;
+  }
+
+  .filter-buttons {
+    flex-wrap: wrap;
+  }
+
+  .task-list li {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .task-buttons {
+    justify-content: flex-end;
+  }
+}
