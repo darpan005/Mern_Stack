@@ -1,0 +1,153 @@
+.app {
+  min-height: 100vh;
+  padding: 50px 20px;
+}
+
+.expense-container {
+  max-width: 700px;
+  margin: auto;
+  background-color: #4382DF;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+  font-weight: 780;
+}
+
+.total-box {
+  background-color: #222;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 25px 0;
+  text-align: center;
+}
+
+.total-box p {
+  margin: 0;
+}
+
+.total-box h2 {
+  margin: 8px 0 0;
+  font-size: 32px;
+}
+
+.expense-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 10px;
+}
+
+.expense-form input,
+.expense-form select,
+.filter-section select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.expense-form button {
+  grid-column: 1 / -1;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #222;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.expense-form button:hover {
+  background-color: #444;
+}
+
+.filter-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 35px;
+  border-bottom: 1px solid #ddd;
+}
+
+.filter-section select {
+  height: 42px;
+}
+
+.expense-list {
+  margin-top: 15px;
+}
+
+.expense-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f8f8;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.expense-item h3 {
+  margin: 0 0 5px;
+}
+
+.expense-item p {
+  margin: 0;
+  color: #777;
+}
+
+.expense-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.expense-right span {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.delete-btn {
+  border: none;
+  background-color: #e74c3c;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.empty-message {
+  text-align: center;
+  color: #888;
+  padding: 25px;
+}
+
+@media (max-width: 600px) {
+  .expense-form {
+    grid-template-columns: 1fr;
+  }
+
+  .expense-form button {
+    grid-column: auto;
+  }
+
+  .expense-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .expense-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

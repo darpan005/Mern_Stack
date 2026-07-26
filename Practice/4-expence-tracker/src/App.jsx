@@ -1,119 +1,153 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  const [expences, setExpences] = useState([]);
+    const [expences, setExpences] = useState(()=>{
+    const savedExpences=localStorage.getItem("expences");
+    return savedExpences ? JSON.parse(savedExpences) : [];
+  });
+
+  useEffect (() => {
+    localStorage.setItem("expences", JSON.stringify(expences));
+  },[expences]);
+
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("Food");
+
   const [filter, setFilter] = useState("All");
 
-  function addExpence(e) {
+  function addExpense(e) {
     e.preventDefault();
 
-    if (title == "" || amount == "") {
+    if (title === "" || amount === "") {
       return;
     }
 
-    const newExpence = {
+    const newExpense = {
       id: Date.now(),
       title: title,
       amount: Number(amount),
       category: category,
     };
 
-    setExpences([...expences, newExpence]);
+    setExpenses([...expences, newExpense]);
+
     setTitle("");
     setAmount("");
     setCategory("Food");
   }
 
-  function deleteExpence(id) {
-    const updatedExpences = expences.filter((expence) => {
-      return expence.id !== id;
+  function deleteExpense(id) {
+    const updatedExpenses = expenses.filter((expense) => {
+      return expense.id !== id;
     });
-    setExpences(updatedExpences);
+
+    setExpenses(updatedExpenses);
   }
 
-  const filterExpence = expences.filter((expence) => {
+  const filteredExpenses = expences.filter((expense) => {
     if (filter === "All") {
       return true;
     }
-    return expence.category === filter;
+
+    return expense.category === filter;
   });
 
-  const totalExpences = filterExpence.reduce((total, expence) => {
-    return total + expence.amount;
+  const totalExpense = filteredExpenses.reduce((total, expense) => {
+    return total + expense.amount;
   }, 0);
 
   return (
-    <div>
-      <div>
-        <h1>Expence Tracker</h1>
-        <h3>Total Expences</h3>
-        <h2>${totalExpences}</h2>
-      </div>
+    <div className="app">
+      <div className="expense-container">
 
-      <form onSubmit={addExpence}>
-        <input
-          type="text"
-          placeholder="Expence Name"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        <h1>Expense Tracker</h1>
 
-        <input
-          type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
+        <div className="total-box">
+          <p>Total Expenses</p>
+          <h2>₹{totalExpense.toFixed(2)}</h2>
+        </div>
 
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="Food">Food</option>
-          <option value="Bills">Bills</option>
-          <option value="Travel">Travel</option>
-          <option value="Shoping">Shoping</option>
-          <option value="Other">Other</option>
-        </select>
+        <form onSubmit={addExpense} className="expense-form">
 
-        <button type="submit">Add Expences</button>
-      </form>
+          <input
+            type="text"
+            placeholder="Expense name"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
 
-      <div>
-        <h3>Expences</h3>
+          <input
+            type="number"
+            placeholder="Amount"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
 
-        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-          <option value="All">All</option>
-          <option value="Food">Food</option>
-          <option value="Bills">Bills</option>
-          <option value="Travel">Travel</option>
-          <option value="Shopping">Shopping</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="Food">Food</option>
+            <option value="Bills">Bills</option>
+            <option value="Travel">Travel</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Other">Other</option>
+          </select>
 
-      <div>
-        {filterExpence.length === 0 ? (
-          <p>No Expences</p>
-        ) : (
-          filterExpence.map((expence) => (
-            <div key={expence.id}>
-              <div>
-                <h3>{expence.title}</h3>
-                <p>{expence.category}</p>
+          <button type="submit">Add Expense</button>
+
+        </form>
+
+        <div className="filter-section">
+
+          <h3>Expenses</h3>
+
+          <select
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          >
+            <option value="All">All</option>
+            <option value="Food">Food</option>
+            <option value="Bills">Bills</option>
+            <option value="Travel">Travel</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Other">Other</option>
+          </select>
+
+        </div>
+
+        <div className="expense-list">
+
+          {filteredExpenses.length === 0 ? (
+            <p className="empty-message">No expenses found.</p>
+          ) : (
+            filteredExpenses.map((expense) => (
+              <div className="expense-item" key={expense.id}>
+
+                <div>
+                  <h3>{expense.title}</h3>
+                  <p>{expense.category}</p>
+                </div>
+
+                <div className="expense-right">
+                  <span>₹{expense.amount.toFixed(2)}</span>
+
+                  <button
+                    onClick={() => deleteExpense(expense.id)}
+                    className="delete-btn"
+                  >
+                    Delete
+                  </button>
+                </div>
+
               </div>
+            ))
+          )}
 
-              <div>
-                <span>${expence.amount}</span>
+        </div>
 
-                <button onClick={() => deleteExpence(expence.id)}>
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))
-        )}
       </div>
     </div>
   );
