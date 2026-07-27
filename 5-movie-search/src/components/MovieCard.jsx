@@ -1,3 +1,5 @@
+import noimage from "../assets/no-image.webp"
+
 function MovieCard({ movie }) {
   return (
     <div className="movie-card">
@@ -5,9 +7,13 @@ function MovieCard({ movie }) {
         src={
           movie.Poster !== "N/A"
             ? movie.Poster
-            : "https://via.placeholder.com/300x450?text=No+Image"
+            : noimage
         }
-        alt={movie.Title}
+        alt= {movie.Poster !== "N/A" ? movie.Title : "No Poster Available"}
+
+        onError={(e)=>{
+          e.target.src = noimage;
+        }}
       />
 
       <h3>{movie.Title}</h3>

@@ -5,7 +5,7 @@ import MovieCard from "./components/MovieCard";
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [search, setSearch] = useState("Batman");
+  const [search, setSearch] = useState("lands of");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
